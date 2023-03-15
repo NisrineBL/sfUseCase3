@@ -15,7 +15,7 @@ public without sharing class ExternalSystemCallout {
     public static void makeCallout(Set<Id> accountIdsSet, Id handledCaseId) {
         SObjectAccessDecision securityDecisionContacts = 
          Security.stripInaccessible(AccessType.READABLE,
-         [SELECT id,name, email, AccountId FROM Contact where accountid IN : accountIdsSet WITH SECURITY_ENFORCED]);
+         [SELECT id,name, email, AccountId FROM Contact where accountid IN : accountIdsSet]);
 
         List<Contact> contactList = securityDecisionContacts.getRecords();
 

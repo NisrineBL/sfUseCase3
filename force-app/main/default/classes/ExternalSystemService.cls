@@ -6,7 +6,7 @@ public without sharing class ExternalSystemService {
     public void registerAttendees(Case handledCase){
         SObjectAccessDecision securityDecisionAccounts = 
          Security.stripInaccessible(AccessType.READABLE,
-         [SELECT id FROM Account where id = :handledCase.AccountId WITH SECURITY_ENFORCED]);
+         [SELECT id FROM Account where id = :handledCase.AccountId]);
 
         List<Account> accounts = securityDecisionAccounts.getRecords();
         Set<Id> accountIdsSet = (new Map<Id,SObject>(accounts)).keySet();

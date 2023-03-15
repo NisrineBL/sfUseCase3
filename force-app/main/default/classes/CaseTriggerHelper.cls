@@ -30,7 +30,7 @@ public with sharing class CaseTriggerHelper {
     public static void registerAttendeesBeforeUpdate(Map<Id, Case> newMap) {
         SObjectAccessDecision securityDecision = 
          Security.stripInaccessible(AccessType.READABLE,
-         [SELECT AccountId, Status FROM Case where Id IN :newMap.keySet() WITH SECURITY_ENFORCED]);
+         [SELECT AccountId, Status FROM Case where Id IN :newMap.keySet()]);
 
         List<Case> cases = securityDecision.getRecords();
         for (Case currentCase : cases) {
@@ -53,7 +53,7 @@ public with sharing class CaseTriggerHelper {
         }
         SObjectAccessDecision securityDecision = 
          Security.stripInaccessible(AccessType.READABLE,
-         [SELECT Id, (select Id from contacts) FROM Account where Id IN :accountIds WITH SECURITY_ENFORCED]);
+         [SELECT Id, (select Id from contacts) FROM Account where Id IN :accountIds]);
         
         return new Map<Id, Account>((List<Account>)securityDecision.getRecords());
     }
